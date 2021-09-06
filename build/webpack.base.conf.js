@@ -15,10 +15,6 @@ module.exports = {
         extensions: ['.js', '.vue', '.json'],
         alias: { '@': resolve('src') }
     },
-    performance: {
-        maxEntrypointSize: 5 * 1024 * 1024,
-        maxAssetSize: 3 * 1024 * 1024
-    },
     module: {
         rules: [
             {

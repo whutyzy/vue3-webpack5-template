@@ -25,6 +25,8 @@ const webpackConfig = merge(baseWebpackConfig, {
         version: process.env.NODE_ENV
     },
     performance: {
+        maxEntrypointSize: 5 * 1024 * 1024,
+        maxAssetSize: 3 * 1024 * 1024,
         hints: 'warning'
     },
     optimization: {
