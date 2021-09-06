@@ -1,0 +1,66 @@
+{
+  "name": "vue3-webpack-temmplate",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "webpack serve --config ./build/webpack.base.conf.js --color",
+    "build": "webpack --config ./build/webpack.base.conf.js --color",
+    "lint-staged": "lint-staged",
+    "prepare": "husky install"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,vue}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add -A"
+    ]
+  },
+  "dependencies": {
+    "core-js": "^3.17.2",
+    "vue": "^3.2.9",
+    "vue-router": "4",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.13",
+    "@babel/eslint-parser": "^7.15.0",
+    "@babel/preset-env": "^7.12.13",
+    "@vue/compiler-sfc": "^3.2.6",
+    "@webpack-cli/serve": "^1.5.2",
+    "autoprefixer": "^10.3.4",
+    "babel-loader": "^8.2.2",
+    "compression-webpack-plugin": "^8.0.1",
+    "copy-webpack-plugin": "^9.0.1",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.0.2",
+    "css-minimizer-webpack-plugin": "^3.0.2",
+    "dart-sass": "^1.25.0",
+    "dotenv": "^10.0.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^7.0.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "fs-extra": "^10.0.0",
+    "html-webpack-plugin": "^4.5.1",
+    "husky": "^7.0.0",
+    "lint-staged": "^10.5.4",
+    "mini-css-extract-plugin": "^2.2.2",
+    "postcss-loader": "^6.1.1",
+    "prettier": "^2.2.1",
+    "sass": "^1.38.2",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^2.0.0",
+    "terser-webpack-plugin": "^5.2.3",
+    "vue-loader": "^16.5.0",
+    "webpack": "^5.17.0",
+    "webpack-bundle-analyzer": "^4.4.2",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.0.0",
+    "webpack-merge": "^4.2.1",
+    "webpackbar": "^4.0.0"
+  }
+}
