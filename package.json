@@ -2,8 +2,8 @@
   "name": "vue3-webpack-temmplate",
   "version": "0.1.0",
   "scripts": {
-    "dev": "webpack serve --config ./build/webpack.base.conf.js --color",
-    "build": "webpack --config ./build/webpack.base.conf.js --color",
+    "dev": "cross-env NODE_ENV=dev  webpack serve --config ./build/webpack.dev.conf.js --color",
+    "build": "cross-env NODE_ENV=prod webpack --config ./build/webpack.prod.conf.js --color",
     "lint-staged": "lint-staged",
     "prepare": "husky install"
   },

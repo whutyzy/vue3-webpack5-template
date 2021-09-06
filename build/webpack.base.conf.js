@@ -1,33 +1,21 @@
 const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const webpack = require('webpack')
-const { resolve } = require('./utils.js')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { resolve } = require('./utils')
+
+const isProdMode = process.env.NODE_ENV === 'prod'
+
 module.exports = {
     entry: {
         app: resolve('src/main.js')
-    },
-    output: {
-        path: resolve('dist'),
-        filename: 'js/[name].[chunkhash].js',
-        publicPath: './',
-        clean: true
     },
     resolve: {
         extensions: ['.js', '.vue', '.json'],
         alias: { '@': resolve('src') }
     },
-    devServer: {
-        // http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename] 进行访问
-        historyApiFallback: true,
-        hot: true,
-        client: {
-            overlay: false,
-            logging: 'none',
-            progress: true
-        },
-        compress: true,
-        host: 'localhost',
-        port: '8080'
+    performance: {
+        maxEntrypointSize: 5 * 1024 * 1024,
+        maxAssetSize: 3 * 1024 * 1024
     },
     module: {
         rules: [
@@ -48,7 +36,14 @@ module.exports = {
             {
                 test: /\.(css|scss|sass)$/,
                 use: [
-                    'style-loader',
+                    !isProdMode
+                        ? 'style-loader'
+                        : {
+                              loader: MiniCssExtractPlugin.loader,
+                              options: {
+                                  publicPath: '../'
+                              }
+                          },
                     'css-loader',
                     'postcss-loader',
                     {
@@ -80,11 +75,10 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: resolve('public/index.html'),
-            title: 'vue3-webpack-title'
+            inject: true
         }),
         new VueLoaderPlugin()
     ]
