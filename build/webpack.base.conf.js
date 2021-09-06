@@ -1,7 +1,9 @@
+const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
+const WebpackBar = require('WebpackBar')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { resolve } = require('./utils')
+const { loadEnvDefine, resolve } = require('./utils')
 
 const isProdMode = process.env.NODE_ENV === 'prod'
 
@@ -75,6 +77,10 @@ module.exports = {
         ]
     },
     plugins: [
+        new WebpackBar(),
+        new webpack.DefinePlugin({
+            'process.env': { ...loadEnvDefine(process.env.NODE_ENV) }
+        }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: resolve('public/index.html'),
